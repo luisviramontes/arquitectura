@@ -11,10 +11,13 @@ require('./db')
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.engine('html', require('ejs').renderFile);
+
 
 // para establecer las distintas rutas, necesitamos instanciar el express router
 var router = require('./routes')  
 app.use('/', router)
+
 
 // iniciamos nuestro servidor
 app.listen(port)
