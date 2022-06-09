@@ -1,9 +1,9 @@
 var express = require('express') //llamamos a Express
-var app = express()           
-var cors = require('cors')    
+var app = express()
+var cors = require('cors')
 var bodyParser = require('body-parser')
-
-var port = process.env.PORT || 8080  // establecemos nuestro puerto
+const path = require('path');
+var port = process.env.PORT || 8084  // establecemos nuestro puerto
 
 /*toda la configuración de bbdd la hacemos en un fichero a parte*/
 require('./db')
@@ -14,8 +14,12 @@ app.use(bodyParser.json())
 app.engine('html', require('ejs').renderFile);
 
 
+app.set('view engine','ejs');
+app.use(express.static(path.join(__dirname, 'views')));
+//app.engine('html', require('ejs').renderFile);
+
 // para establecer las distintas rutas, necesitamos instanciar el express router
-var router = require('./routes')  
+var router = require('./routes')
 app.use('/', router)
 
 
@@ -25,3 +29,5 @@ console.log('API ITZ escuchando en el puerto ' + port)
 
 /*lo añado al final de app/server.js:*/
 module.exports = app
+
+

@@ -1,4 +1,4 @@
-var ruta = "http://localhost:8080";
+var ruta = "http://18.222.194.122/";
 
 
 function traer_clientes() {
@@ -19,9 +19,11 @@ function traer_clientes() {
                 var cell2 = row.insertCell(1);
                 var cell3 = row.insertCell(2);
                 var cell4 = row.insertCell(3);
-                cell1.innerHTML = element.name;
+                cell1.innerHTML =
+                    '<th>' + element.name + ' </th>';
                 cell2.innerHTML = element.age;
-                cell3.innerHTML = ' <button onclick="eliminar_cliente(' + element._id + ')" class="btn btn-primary" id=eliminar_btn_' + element._id + '>Editar</button>';
+                cell3.innerHTML =
+                    ' <button value=' + element._id + ' onclick="editar_cliente(this.value)" class="btn btn-primary" id=editar_btn_' + element._id + '>Editar</button>';
                 cell4.innerHTML =
                     '      <button value=' + element._id + ' onclick="eliminar_cliente(this.value)" class="btn btn-danger" name="editar" ' +
                     '      id=eliminar_btn_' + element._id + '>Eliminar</button>';
@@ -97,5 +99,57 @@ function eliminar_cliente(id) {
             $("#row_" + id).remove();
         }
     });
+
+}
+
+function editar_cliente(id) {
+    $.ajax({
+        type: "get",
+        method: 'get',
+        url: ruta + "/users/" + id + "",
+        success: function (data) {
+            var name= data.name;
+            var age = data.age;
+            document.getElementById('name_edit').value=name;
+            document.getElementById('age_edit').value=age;
+            document.getElementById('_id').value=id;
+            $('#exampleModalCenter').modal('show');
+
+        }
+    });
+}
+
+function actualizar_usuario(){
+    var dataString = $('#users-form-edit').serialize(); // carga todos 
+    id= document.getElementById('_id').value;
+    console.log(dataString);
+    $.ajax({
+        type: "post",
+        method: 'put',
+        url: ruta + "/users/" + id + "?"+dataString,
+        data: dataString,
+        success: function (data) {
+            $("#user_" + id).remove();
+            $("#row_" + id).remove();
+
+            var rows = document.getElementById("table_users").rows.length;
+            var tabla = document.getElementById("table_users");
+            var row = tabla.insertRow(rows);
+            row.id = "row_" + data._id;
+            row.style.backgroundColor = "white";
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            cell1.innerHTML = data.name;
+            cell2.innerHTML = data.age;
+            cell3.innerHTML = ' <button onclick="eliminar_cliente(' + data._id + ')" class="btn btn-primary" name="editar_btn_" ' + ' id=editar_btn_' + data._id + '>Editar</button>';
+            cell4.innerHTML =
+                '      <button value=' + data._id + ' onclick="eliminar_cliente(this.value)" class="btn btn-danger" name="editar" ' +
+                '      id=eliminar_btn_' + data._id + '>Eliminar</button>';
+
+        }
+    });
+
 
 }

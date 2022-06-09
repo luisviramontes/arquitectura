@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </meta>
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <script src="assets/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Clientes API</title>
+</head>
+
+<body>
+    <!-- Barra de navegación-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a href="#" class="navbar-brand">Clientes API</a>
+    </nav>
+
+    <!--Contenido principal-->
+    <div class="container">
+        <!--Aplicacion-->
+        <div id=" App" class="row pt-5">
+            <!--Formulario-->
+            <div class="col-md-4">
+                <div class="card-header">
+                    <h4>Agregar Usuarios</h4>
+                </div>
+                <form id="users-form" name="users-form" href="/users" type="post" class="card-body">
+                    <div class="form-group">
+                        <!--Form group de boostrap separa inputs-->
+                        <input type="text" id="name" name="name" placeholder="Nombre del usuario" class="form-control">
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="number" id="age" name="age" placeholder="Edad del usuario" class="form-control">
+
+                    </div>
+
+                    <div class="form group">
+                        <input type="button" onclick="guardar_cliente()" value="Guardar"
+                            class="btn btn-primary btn-block ">
+                    </div>
+                </form>
+
+            </div>
+
+            <!--Listado de productos-->
+            <div id="listado" class="col-md-8">
+
+            </div>
+
+            <table id="table_users" name="table_users" class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="card-header">
+                            <h4>Editar Usuario</h4>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="users-form-edit" name="users-form-edit" href="/users" type="post" class="card-body">
+                            <div class="form-group">
+                                <!--Form group de boostrap separa inputs-->
+                                <input type="hidden" id="_id" name="_id">
+
+                                <input type="text" id="name_edit" name="name_edit" placeholder="Nombre del usuario"
+                                    class="form-control">
+                            </div>
+
+
+                            <div class="form-group">
+                                <input type="number" id="age_edit" name="age_edit" placeholder="Edad del usuario"
+                                    class="form-control">
+
+                            </div>
+
+                         
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button"  onclick="actualizar_usuario()" class="btn btn-primary">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="assets/scripts.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            traer_clientes();
+        });
+    </script>
+</body>
+
+</html>

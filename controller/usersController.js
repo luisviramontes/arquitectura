@@ -74,3 +74,21 @@ exports.remove = function (req, res) {
         return res.json(user)
     })
 }
+
+exports.show = function (req, res) {
+    var id = req.params.id
+    Users.findOne({ _id: id }, function (err, user) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Se ha producido un error al obtener el usuario'
+            })
+        }
+        if (!user) {
+            return res.status(404).json({
+                message: 'No tenemos el usuario'
+            })
+        }
+        return res.json(user)
+    })
+}
+
