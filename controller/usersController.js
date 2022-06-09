@@ -45,8 +45,8 @@ exports.update = function (req, res) {
                 message: 'No hemos encontrado el user'
             })
         }
-        user.name = req.query.name
-        user.age = req.query.age
+        user.name = req.query.name_edit
+        user.age = req.query.age_edit
         user.save(function (err, user) {
             if (err) {
                 return res.status(500).json({
