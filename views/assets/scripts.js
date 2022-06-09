@@ -1,4 +1,4 @@
-var ruta = "http://18.222.194.122/";
+var ruta = "http://18.222.194.122";
 
 
 function traer_clientes() {
@@ -75,7 +75,8 @@ function guardar_cliente() {
             var cell4 = row.insertCell(3);
             cell1.innerHTML = data.name;
             cell2.innerHTML = data.age;
-            cell3.innerHTML = ' <button onclick="eliminar_cliente(' + data._id + ')" class="btn btn-primary" name="editar_btn_" ' + ' id=editar_btn_' + data._id + '>Editar</button>';
+            cell3.innerHTML =
+            ' <button value=' + data._id + ' onclick="editar_cliente(this.value)" class="btn btn-primary" id=editar_btn_' + data._id + '>Editar</button>';
             cell4.innerHTML =
                 '      <button value=' + data._id + ' onclick="eliminar_cliente(this.value)" class="btn btn-danger" name="editar" ' +
                 '      id=eliminar_btn_' + data._id + '>Eliminar</button>';
@@ -124,8 +125,7 @@ function actualizar_usuario(){
     id= document.getElementById('_id').value;
     console.log(dataString);
     $.ajax({
-        type: "post",
-        method: 'put',
+        type: "PUT",
         url: ruta + "/users/" + id + "?"+dataString,
         data: dataString,
         success: function (data) {
@@ -143,7 +143,8 @@ function actualizar_usuario(){
             var cell4 = row.insertCell(3);
             cell1.innerHTML = data.name;
             cell2.innerHTML = data.age;
-            cell3.innerHTML = ' <button onclick="eliminar_cliente(' + data._id + ')" class="btn btn-primary" name="editar_btn_" ' + ' id=editar_btn_' + data._id + '>Editar</button>';
+            cell3.innerHTML =
+            ' <button value=' + data._id + ' onclick="editar_cliente(this.value)" class="btn btn-primary" id=editar_btn_' + data._id + '>Editar</button>';
             cell4.innerHTML =
                 '      <button value=' + data._id + ' onclick="eliminar_cliente(this.value)" class="btn btn-danger" name="editar" ' +
                 '      id=eliminar_btn_' + data._id + '>Eliminar</button>';
