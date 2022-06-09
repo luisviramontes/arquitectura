@@ -149,6 +149,8 @@ function actualizar_usuario(){
                 '      <button value=' + data._id + ' onclick="eliminar_cliente(this.value)" class="btn btn-danger" name="editar" ' +
                 '      id=eliminar_btn_' + data._id + '>Eliminar</button>';
 
+            $('#exampleModalCenter').modal("hide");
+
         }
     });
 
